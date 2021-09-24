@@ -15,9 +15,11 @@
 			<td>{{ prof.dateNaissance.format('d/m/Y') }}</td>
 			<td>{{ prof.matiere.nom }}</td>
 			<td>
-				<a class="btn btn-danger" href="#" title="Supprimer" onclick="return confirm('Êtes-vous sûr ?')">
-					<i class="fa fa-trash" aria-hidden="true"></i>
-				</a>
+				{% if prof.clasesPrincipales is empty %}
+					<a class="btn btn-danger" href="{{ path('delete_prof', {id: prof.id}) }}" title="Supprimer" onclick="return confirm('Êtes-vous sûr ?')">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</a>
+				{% endif %}
 			</td>
 		</tr>
 	{% endfor %}

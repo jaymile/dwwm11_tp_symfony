@@ -26,7 +26,7 @@ class MatiereController extends AbstractController {
             $em->persist($matiere);
             $em->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('liste_matiere');
         } else {
             return $this->render('matiere/add.html.twig', [
                 'formulaire' => $formulaire->createView()
@@ -45,4 +45,15 @@ class MatiereController extends AbstractController {
             'matieres' => $matieres
         ]);
     }
+
+    /**
+     * @Route("/matieres/{id}/delete", name="delete_matiere")
+     */
+    public function delete(Matiere $matiere, EntityManagerInterface $em) {
+        $em->remove($matiere);
+        $em->flush();
+
+        return $this->redirectToRoute('liste_matiere');
+    }
+
 }

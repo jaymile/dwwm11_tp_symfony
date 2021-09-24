@@ -26,7 +26,7 @@ class EleveController extends AbstractController {
             $em->persist($eleve);
             $em->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('liste_eleve');
         } else {
             return $this->render('eleve/add.html.twig', [
                 'formulaire' => $formulaire->createView()
@@ -44,5 +44,15 @@ class EleveController extends AbstractController {
             'entityName' => 'élèves',
             'eleves' => $eleves
         ]);
+    }
+
+    /**
+     * @Route("/eleves/{id}/delete", name="delete_eleve")
+     */
+    public function delete(Eleve $eleve, EntityManagerInterface $em) {
+        $em->remove($eleve);
+        $em->flush();
+
+        return $this->redirectToRoute('liste_eleve');
     }
 }

@@ -14,7 +14,7 @@ class NoteController extends AbstractController {
     /**
      * @Route("/notes/new", name="create_note")
      */
-    public function index(Request $request, EntityManagerInterface $em): Response {
+    public function create(Request $request, EntityManagerInterface $em): Response {
         $note = new Note;
         $formulaire = $this->createForm(NoteType::class, $note);
 
@@ -32,4 +32,15 @@ class NoteController extends AbstractController {
             ]);
         }
     }
+
+    /**
+     * @Route("/notes/{id}/delete", name="delete_note")
+     */
+    public function delete(Note $note, EntityManagerInterface $em) {
+        $em->remove($note);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
 }

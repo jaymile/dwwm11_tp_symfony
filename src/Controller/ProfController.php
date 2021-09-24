@@ -26,7 +26,7 @@ class ProfController extends AbstractController {
             $em->persist($prof);
             $em->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('liste_prof');
         } else {
             return $this->render('prof/add.html.twig', [
                 'formulaire' => $formulaire->createView()
@@ -46,4 +46,15 @@ class ProfController extends AbstractController {
         ]);
     }
 
+    /**
+     * @Route("/profs/{id}/delete", name="delete_prof")
+     */
+    public function delete(Prof $prof, EntityManagerInterface $em) {
+        if ($prof->getClasesPrincipales()->isEmpty()) {
+            $em->remove($prof);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('liste_prof');
+    }
 }
