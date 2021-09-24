@@ -37,13 +37,6 @@ class NoteType extends AbstractType {
                 'class' => Matiere::class,
                 'choice_label' => 'nom'
             ])
-            ->add('eleve', EntityType::class, [
-                'class' => Eleve::class,
-                'choice_label' => function (Eleve $eleve) {
-                    // On peut passer une fonction pour savoir quoi afficher pour chaque élève
-                    return $eleve->getDisplayedName();
-                }
-            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer'
             ]);

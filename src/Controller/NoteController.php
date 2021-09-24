@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Note;
+use App\Entity\Eleve;
 use App\Form\NoteType;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,22 +14,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class NoteController extends AbstractController {
     /**
-     * @Route("/notes/new", name="create_note")
+     * @Route("/notes/new/{id}", name="create_note")
      */
-    public function create(Request $request, EntityManagerInterface $em): Response {
+    public function create(Eleve $eleve, Request $request, EntityManagerInterface $em): Response {
         $note = new Note;
+        $note->setDate(new DateTime);
+
         $formulaire = $this->createForm(NoteType::class, $note);
 
         $formulaire->handleRequest($request);
 
         if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            $note->setEleve($eleve);
+
             // J'insère 
             $em->persist($note);
             $em->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('details_eleve', [
+                'id' => $eleve->getId()
+            ]);
         } else {
             return $this->render('note/add.html.twig', [
+                'eleve' => $eleve,
                 'formulaire' => $formulaire->createView()
             ]);
         }
@@ -42,5 +51,4 @@ class NoteController extends AbstractController {
 
         return $this->redirectToRoute('home');
     }
-
 }

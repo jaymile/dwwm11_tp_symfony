@@ -4,5 +4,6 @@
 
 {% block body %}
     <h1>Ajout d'une note</h1>
+    <p>Nouvelle note pour {{ eleve.getDisplayedName() }}.</p>
     {{ form(formulaire) }}
 {% endblock %}
