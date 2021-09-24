@@ -2,14 +2,17 @@
 
 namespace App\Form;
 
+use App\Entity\Note;
 use App\Entity\Eleve;
 use App\Entity\Matiere;
-use App\Entity\Note;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class NoteType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
@@ -37,6 +40,7 @@ class NoteType extends AbstractType {
             ->add('eleve', EntityType::class, [
                 'class' => Eleve::class,
                 'choice_label' => function (Eleve $eleve) {
+                    // On peut passer une fonction pour savoir quoi afficher pour chaque élève
                     return $eleve->getPrenom() . ' ' . strtoupper($eleve->getNom());
                 }
             ])
