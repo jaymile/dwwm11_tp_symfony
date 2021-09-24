@@ -31,7 +31,7 @@ class NoteType extends AbstractType {
             ])
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy'
+                'input_format' => 'd/M/Y'
             ])
             ->add('matiere', EntityType::class, [
                 'class' => Matiere::class,

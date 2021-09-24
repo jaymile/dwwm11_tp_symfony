@@ -18,8 +18,19 @@
         <nav class="nav justify-content-center">
             <a class="nav-link active" href="{{ path('home') }}">Accueil</a>
             <a class="nav-link" href="{{ path('reglement') }}">Règlement intérieur</a>
+
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ajouter</a>
+
+            <div class="dropdown-menu">
+                <a class="nav-link" href="{{ path('create_matiere') }}">Nouvelle matière</a>
+                <a class="nav-link" href="{{ path('create_classe') }}">Nouvelle classe</a>
+                <a class="nav-link" href="{{ path('create_eleve') }}">Nouvel élève</a>
+                <a class="nav-link" href="{{ path('create_note') }}">Nouvelle note</a>
+                <a class="nav-link" href="{{ path('create_prof') }}">Nouveau professeur</a>
+            </div>
+
         </nav>
-        
+
         {% block body %}{% endblock %}
     </div>
 

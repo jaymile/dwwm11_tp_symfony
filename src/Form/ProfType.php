@@ -15,11 +15,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProfType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-            ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
+            ->add('nom', TextType::class)
             ->add('dateNaissance', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy'
+                'input_format' => 'd/M/Y'
             ])
             ->add('matiere', EntityType::class, [
                 'class' => Matiere::class,
