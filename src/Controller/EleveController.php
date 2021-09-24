@@ -60,7 +60,20 @@ class EleveController extends AbstractController {
      * @Route("/eleves/{id}", name="details_eleve")
      */
     public function details(Eleve $eleve) {
+        $somme_notes_coefficientees = 0;
+        $somme_coefs = 0;
+
+        foreach ($eleve->getNotes() as $note) {
+            $somme_coefs += $note->getCoefficient();
+            $somme_notes_coefficientees += $note->getNote() * $note->getCoefficient();
+        }
+
+        if ($somme_coefs == 0) $somme_coefs = 1;
+
+        $moyenne = round($somme_notes_coefficientees / $somme_coefs, 2);
+
         return $this->render('eleve/details.html.twig', [
+            'moyenne' => $moyenne,
             'eleve' => $eleve
         ]);
     }
