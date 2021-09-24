@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProfRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,22 @@ class Prof
      * @ORM\Column(type="date")
      */
     private $dateNaissance;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Classe::class, mappedBy="professeurPrincipal")
+     */
+    private $clasesPrincipales;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Matiere::class, inversedBy="professeurs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $matiere;
+
+    public function __construct()
+    {
+        $this->clasesPrincipales = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +87,48 @@ class Prof
     public function setDateNaissance(\DateTimeInterface $dateNaissance): self
     {
         $this->dateNaissance = $dateNaissance;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Classe[]
+     */
+    public function getClasesPrincipales(): Collection
+    {
+        return $this->clasesPrincipales;
+    }
+
+    public function addClasesPrincipale(Classe $clasesPrincipale): self
+    {
+        if (!$this->clasesPrincipales->contains($clasesPrincipale)) {
+            $this->clasesPrincipales[] = $clasesPrincipale;
+            $clasesPrincipale->setProfesseurPrincipal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClasesPrincipale(Classe $clasesPrincipale): self
+    {
+        if ($this->clasesPrincipales->removeElement($clasesPrincipale)) {
+            // set the owning side to null (unless already changed)
+            if ($clasesPrincipale->getProfesseurPrincipal() === $this) {
+                $clasesPrincipale->setProfesseurPrincipal(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getMatiere(): ?Matiere
+    {
+        return $this->matiere;
+    }
+
+    public function setMatiere(?Matiere $matiere): self
+    {
+        $this->matiere = $matiere;
 
         return $this;
     }
