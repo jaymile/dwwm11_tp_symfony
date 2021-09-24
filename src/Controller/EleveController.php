@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Eleve;
 use App\Form\EleveType;
+use App\Repository\EleveRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ class EleveController extends AbstractController {
     /**
      * @Route("/eleves/new", name="create_eleve")
      */
-    public function index(Request $request, EntityManagerInterface $em): Response {
+    public function create(Request $request, EntityManagerInterface $em): Response {
         $eleve = new Eleve;
         $formulaire = $this->createForm(EleveType::class, $eleve);
 
@@ -31,5 +32,17 @@ class EleveController extends AbstractController {
                 'formulaire' => $formulaire->createView()
             ]);
         }
+    }
+
+    /**
+     * @Route("/eleves", name="liste_eleve")
+     */
+    public function liste(EleveRepository $repository) {
+        $eleves = $repository->findAll();
+
+        return $this->render('eleve/liste.html.twig', [
+            'entityName' => 'élèves',
+            'eleves' => $eleves
+        ]);
     }
 }

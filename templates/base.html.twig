@@ -8,8 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     {% block css %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {% endblock %}
 </head>
 
@@ -19,14 +20,24 @@
             <a class="nav-link active" href="{{ path('home') }}">Accueil</a>
             <a class="nav-link" href="{{ path('reglement') }}">Règlement intérieur</a>
 
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ajouter</a>
+            <!-- <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ajouter</a> -->
 
-            <div class="dropdown-menu">
+            <!-- <div class="dropdown-menu" id="add">
                 <a class="nav-link" href="{{ path('create_matiere') }}">Nouvelle matière</a>
                 <a class="nav-link" href="{{ path('create_classe') }}">Nouvelle classe</a>
                 <a class="nav-link" href="{{ path('create_eleve') }}">Nouvel élève</a>
                 <a class="nav-link" href="{{ path('create_note') }}">Nouvelle note</a>
                 <a class="nav-link" href="{{ path('create_prof') }}">Nouveau professeur</a>
+            </div> -->
+
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Listes</a>
+
+            <div class="dropdown-menu d-inline" id="list">
+                <a class="nav-link" href="{{ path('liste_matiere') }}">matières</a>
+                <a class="nav-link" href="{{ path('liste_classe') }}">classes</a>
+                <a class="nav-link" href="{{ path('liste_eleve') }}">élèves</a>
+                {# <a class="nav-link" href="{{ path('liste_note') }}">notes</a> #}
+                <a class="nav-link" href="{{ path('liste_prof') }}">professeurs</a>
             </div>
 
         </nav>

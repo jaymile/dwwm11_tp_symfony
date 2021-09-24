@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Prof;
 use App\Form\ProfType;
+use App\Repository\ProfRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ class ProfController extends AbstractController {
     /**
      * @Route("/professeurs/new", name="create_prof")
      */
-    public function index(Request $request, EntityManagerInterface $em): Response {
+    public function create(Request $request, EntityManagerInterface $em): Response {
         $prof = new Prof;
         $formulaire = $this->createForm(ProfType::class, $prof);
 
@@ -32,4 +33,17 @@ class ProfController extends AbstractController {
             ]);
         }
     }
+
+    /**
+     * @Route("/profs", name="liste_prof")
+     */
+    public function liste(ProfRepository $repository) {
+        $profs = $repository->findAll();
+
+        return $this->render('prof/liste.html.twig', [
+            'entityName' => 'professeurs',
+            'profs' => $profs
+        ]);
+    }
+
 }

@@ -1,0 +1,22 @@
+{% extends 'gabarit_liste.html.twig' %}
+
+{% block thead %}
+	<th>Nom</th>
+	<th>Niveau</th>
+	<th>Prof. principal</th>
+{% endblock %}
+
+{% block tbody %}
+	{% for classe in classes %}
+		<tr>
+			<td>{{ classe.nom }}</td>
+			<td>{{ classe.niveau }}</td>
+			<td>{{ classe.professeurPrincipal.prenom }} {{ classe.professeurPrincipal.nom }}</td>
+			<td>
+				<a class="btn btn-danger" href="#" title="Supprimer" onclick="return confirm('Êtes-vous sûr ?')">
+					<i class="fa fa-trash" aria-hidden="true"></i>
+				</a>
+			</td>
+		</tr>
+	{% endfor %}
+{% endblock %}

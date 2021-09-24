@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Matiere;
 use App\Form\MatiereType;
+use App\Repository\MatiereRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ class MatiereController extends AbstractController {
     /**
      * @Route("/matieres/new", name="create_matiere")
      */
-    public function index(Request $request, EntityManagerInterface $em): Response {
+    public function create(Request $request, EntityManagerInterface $em): Response {
         $matiere = new Matiere;
         $formulaire = $this->createForm(MatiereType::class, $matiere);
 
@@ -31,5 +32,17 @@ class MatiereController extends AbstractController {
                 'formulaire' => $formulaire->createView()
             ]);
         }
+    }
+
+    /**
+     * @Route("/matieres", name="liste_matiere")
+     */
+    public function liste(MatiereRepository $repository) {
+        $matieres = $repository->findAll();
+
+        return $this->render('matiere/liste.html.twig', [
+            'entityName' => 'matières',
+            'matieres' => $matieres
+        ]);
     }
 }

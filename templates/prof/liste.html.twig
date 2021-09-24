@@ -1,0 +1,24 @@
+{% extends 'gabarit_liste.html.twig' %}
+
+{% block thead %}
+	<th>Prénom</th>
+	<th>Nom</th>
+	<th>Date de naissance</th>
+	<th>Matière</th>
+{% endblock %}
+
+{% block tbody %}
+	{% for prof in profs %}
+		<tr>
+			<td>{{ prof.prenom }}</td>
+			<td>{{ prof.nom }}</td>
+			<td>{{ prof.dateNaissance.format('d/m/Y') }}</td>
+			<td>{{ prof.matiere.nom }}</td>
+			<td>
+				<a class="btn btn-danger" href="#" title="Supprimer" onclick="return confirm('Êtes-vous sûr ?')">
+					<i class="fa fa-trash" aria-hidden="true"></i>
+				</a>
+			</td>
+		</tr>
+	{% endfor %}
+{% endblock %}

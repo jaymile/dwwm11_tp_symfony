@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Classe;
 use App\Form\ClasseType;
+use App\Repository\ClasseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,5 +32,17 @@ class ClasseController extends AbstractController {
                 'formulaire' => $formulaire->createView()
             ]);
         }
+    }
+
+    /**
+     * @Route("/classes", name="liste_classe")
+     */
+    public function liste(ClasseRepository $repository) {
+        $classes = $repository->findAll();
+
+        return $this->render('classe/liste.html.twig', [
+            'entityName' => 'classes',
+            'classes' => $classes
+        ]);
     }
 }
