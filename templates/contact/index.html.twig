@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact | {{ parent() }}{% endblock %}
+
+{% block body %}
+<h1>Contact</h1>
+
+<p>Vous pouvez nous appeler au <a href="tel:+0123456789">01.23.45.67.89</a> de 8h à 16h30 du lundi au vendredi les jours
+	de pleine lune.</p>
+
+<p>Vous pouvez également nous contacter via le formulaire suivant.</p>
+
+{% if notif is not empty %}
+	<div class="alert alert-success" role="alert">
+		{{ notif }}
+	</div>
+{% endif %}
+
+{{ form(formulaire) }}
+{% endblock %}

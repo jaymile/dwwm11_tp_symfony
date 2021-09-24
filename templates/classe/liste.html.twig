@@ -3,6 +3,7 @@
 {% block thead %}
 	<th>Nom</th>
 	<th>Niveau</th>
+	<th>Nb. d'élèves</th>
 	<th>Prof. principal</th>
 {% endblock %}
 
@@ -11,6 +12,7 @@
 		<tr>
 			<td>{{ classe.nom }}</td>
 			<td>{{ classe.niveau }}</td>
+			<td>{{ classe.eleves.count() }}</td>
 			<td>{{ classe.professeurPrincipal.getDisplayedName() }}</td>
 			<td></td>
 		</tr>
