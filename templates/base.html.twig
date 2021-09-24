@@ -8,48 +8,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     {% block css %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {% endblock %}
 </head>
 
 <body>
-    <div class="container">
-        <nav class="nav justify-content-center">
-            <a class="nav-link active" href="{{ path('home') }}">Accueil</a>
-            <a class="nav-link" href="{{ path('reglement') }}">Règlement intérieur</a>
+    <div class="container pb-5">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+            <a class="navbar-brand" href="{{ path('home') }}">Accueil</a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('reglement') }}">Règlement intérieur</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="add" aria-haspopup="true"
+                        aria-expanded="false" href="#">Ajouter</a>
 
-            <div class="btn-group">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Ajouter</a>
-                
-                <div class="dropdown-menu">
-                    <a class="nav-link" href="{{ path('create_matiere') }}">Nouvelle matière</a>
-                    <a class="nav-link" href="{{ path('create_classe') }}">Nouvelle classe</a>
-                    <a class="nav-link" href="{{ path('create_eleve') }}">Nouvel élève</a>
-                    <a class="nav-link" href="{{ path('create_prof') }}">Nouveau professeur</a>
-                </div>
-            </div>
+                    <div class="dropdown-menu" aria-labelledby="add">
+                        <a class="dropdown-item" href="{{ path('create_matiere') }}">Nouvelle matière</a>
+                        <a class="dropdown-item" href="{{ path('create_classe') }}">Nouvelle classe</a>
+                        <a class="dropdown-item" href="{{ path('create_eleve') }}">Nouvel élève</a>
+                        <a class="dropdown-item" href="{{ path('create_prof') }}">Nouveau professeur</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="list" aria-haspopup="true"
+                        aria-expanded="false" href="#">Listes</a>
 
-            <div class="btn-group">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Listes</a>
-
-                <div class="dropdown-menu d-inline">
-                    <a class="nav-link" href="{{ path('liste_matiere') }}">matières</a>
-                    <a class="nav-link" href="{{ path('liste_classe') }}">classes</a>
-                    <a class="nav-link" href="{{ path('liste_eleve') }}">élèves</a>
-                    <a class="nav-link" href="{{ path('liste_prof') }}">professeurs</a>
-                </div>
-            </div>
+                    <div class="dropdown-menu" aria-labelledby="list">
+                        <a class="dropdown-item" href="{{ path('liste_matiere') }}">matières</a>
+                        <a class="dropdown-item" href="{{ path('liste_classe') }}">classes</a>
+                        <a class="dropdown-item" href="{{ path('liste_eleve') }}">élèves</a>
+                        <a class="dropdown-item" href="{{ path('liste_prof') }}">professeurs</a>
+                    </div>
+                </li>
+            </ul>
         </nav>
-
         {% block body %}{% endblock %}
     </div>
 
     {% block js %}
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
