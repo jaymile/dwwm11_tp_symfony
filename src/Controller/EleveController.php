@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Eleve;
 use App\Form\EleveType;
+use App\Form\SearchEleveType;
 use App\Repository\EleveRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,6 +42,26 @@ class EleveController extends AbstractController {
         $eleves = $repository->findAll();
 
         return $this->render('eleve/liste.html.twig', [
+            'entityName' => 'élèves',
+            'eleves' => $eleves
+        ]);
+    }
+
+    /**
+     * @Route("/eleves/search", name="search_eleve")
+     */
+    public function search(EleveRepository $repository, Request $request) {
+        $formulaire = $this->createForm(SearchEleveType::class);
+        $formulaire->handleRequest($request);
+
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            $eleves = $repository->searchByName($formulaire->get('recherche')->getData());
+        } else {
+            $eleves = $repository->findAll();
+        }
+
+        return $this->render('eleve/liste.html.twig', [
+            'formulaire' => $formulaire->createView(),
             'entityName' => 'élèves',
             'eleves' => $eleves
         ]);

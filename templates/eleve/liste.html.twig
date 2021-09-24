@@ -26,3 +26,11 @@
 		</tr>
 	{% endfor %}
 {% endblock %}
+
+{% block body %}
+	{% if formulaire is not empty %}
+		{{ form(formulaire) }}
+	{% endif %}
+
+	{{ parent() }}
+{% endblock %}

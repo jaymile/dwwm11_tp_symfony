@@ -12,11 +12,18 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Eleve[]    findAll()
  * @method Eleve[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EleveRepository extends ServiceEntityRepository
-{
-    public function __construct(ManagerRegistry $registry)
-    {
+class EleveRepository extends ServiceEntityRepository {
+    public function __construct(ManagerRegistry $registry) {
         parent::__construct($registry, Eleve::class);
+    }
+
+    public function searchByName(string $name) {
+        return $this->createQueryBuilder('e')
+            ->where('e.prenom LIKE :name')
+            ->orWhere('e.nom LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+            ->getQuery()
+            ->getResult();
     }
 
     // /**
