@@ -11,7 +11,7 @@
 		<tr>
 			<td>{{ classe.nom }}</td>
 			<td>{{ classe.niveau }}</td>
-			<td>{{ classe.professeurPrincipal.prenom }} {{ classe.professeurPrincipal.nom }}</td>
+			<td>{{ classe.professeurPrincipal.getDisplayedName() }}</td>
 			<td></td>
 		</tr>
 	{% endfor %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ eleve.getDisplayedName() }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+<h1>{{ eleve.getDisplayedName() }}</h1>
+
+<h2>Informations</h2>
+<dl>
+	<dt>Date de naissance</dt>
+	<dd>{{ eleve.dateNaissance.format('d/m/Y') }}</dd>
+
+	<dt>Niveau</dt>
+	<dd>{{ eleve.classe.niveau }}</dd>
+
+	<dt>Classe</dt>
+	<dd>{{ eleve.classe.nom }}</dd>
+
+	<dt>Prof. principal</dt>
+	<dd>{{ eleve.classe.professeurPrincipal.getDisplayedName() }}</dd>
+</dl>
+
+<h2>Notes</h2>
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th>Matière</th>
+			<th>Date</th>
+			<th>Note</th>
+			<th>Coef.</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		{% for note in eleve.notes %}
+			<tr>
+				<td>{{ note.matiere.nom }}</td>
+				<td>{{ note.date.format('d/m/Y') }}</td>
+				<td>{{ note.note }}</td>
+				<td>{{ note.coefficient }}</td>
+			</tr>
+		{% endfor %}
+
+	</tbody>
+</table>
+{% endblock %}

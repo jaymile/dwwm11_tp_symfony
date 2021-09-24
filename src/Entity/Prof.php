@@ -10,8 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ProfRepository::class)
  */
-class Prof
-{
+class Prof {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -45,47 +44,39 @@ class Prof
      */
     private $matiere;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->clasesPrincipales = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getNom(): ?string
-    {
+    public function getNom(): ?string {
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
-    {
+    public function setNom(string $nom): self {
         $this->nom = $nom;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
-    {
+    public function getPrenom(): ?string {
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
-    {
+    public function setPrenom(string $prenom): self {
         $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
-    {
+    public function getDateNaissance(): ?\DateTimeInterface {
         return $this->dateNaissance;
     }
 
-    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
-    {
+    public function setDateNaissance(\DateTimeInterface $dateNaissance): self {
         $this->dateNaissance = $dateNaissance;
 
         return $this;
@@ -94,13 +85,11 @@ class Prof
     /**
      * @return Collection|Classe[]
      */
-    public function getClasesPrincipales(): Collection
-    {
+    public function getClasesPrincipales(): Collection {
         return $this->clasesPrincipales;
     }
 
-    public function addClasesPrincipale(Classe $clasesPrincipale): self
-    {
+    public function addClasesPrincipale(Classe $clasesPrincipale): self {
         if (!$this->clasesPrincipales->contains($clasesPrincipale)) {
             $this->clasesPrincipales[] = $clasesPrincipale;
             $clasesPrincipale->setProfesseurPrincipal($this);
@@ -109,8 +98,7 @@ class Prof
         return $this;
     }
 
-    public function removeClasesPrincipale(Classe $clasesPrincipale): self
-    {
+    public function removeClasesPrincipale(Classe $clasesPrincipale): self {
         if ($this->clasesPrincipales->removeElement($clasesPrincipale)) {
             // set the owning side to null (unless already changed)
             if ($clasesPrincipale->getProfesseurPrincipal() === $this) {
@@ -121,15 +109,17 @@ class Prof
         return $this;
     }
 
-    public function getMatiere(): ?Matiere
-    {
+    public function getMatiere(): ?Matiere {
         return $this->matiere;
     }
 
-    public function setMatiere(?Matiere $matiere): self
-    {
+    public function setMatiere(?Matiere $matiere): self {
         $this->matiere = $matiere;
 
         return $this;
+    }
+
+    public function getDisplayedName() {
+        return $this->prenom . ' ' . strtoupper($this->nom);
     }
 }

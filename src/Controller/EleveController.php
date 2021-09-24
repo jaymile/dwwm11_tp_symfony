@@ -55,4 +55,13 @@ class EleveController extends AbstractController {
 
         return $this->redirectToRoute('liste_eleve');
     }
+
+    /**
+     * @Route("/eleves/{id}", name="details_eleve")
+     */
+    public function details(Eleve $eleve) {
+        return $this->render('eleve/details.html.twig', [
+            'eleve' => $eleve
+        ]);
+    }
 }

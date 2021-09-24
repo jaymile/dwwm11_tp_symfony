@@ -15,6 +15,10 @@
 			<td>{{ eleve.dateNaissance.format('d/m/Y') }}</td>
 			<td>{{ eleve.classe.nom }}</td>
 			<td>
+				<a class="btn btn-primary mr-2" href="{{ path('details_eleve', {id: eleve.id}) }}" title="Détails">
+					<i class="fa fa-file-text" aria-hidden="true"></i>
+				</a>
+
 				<a class="btn btn-danger" href="{{ path('delete_eleve', {id: eleve.id}) }}" title="Supprimer" onclick="return confirm('Êtes-vous sûr ?')">
 					<i class="fa fa-trash" aria-hidden="true"></i>
 				</a>

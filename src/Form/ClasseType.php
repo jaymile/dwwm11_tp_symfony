@@ -20,7 +20,7 @@ class ClasseType extends AbstractType {
                 'class' => Prof::class,
                 'choice_label' => function (Prof $prof) {
                     // On peut passer une fonction pour savoir quoi afficher pour chaque élève
-                    return $prof->getPrenom() . ' ' . strtoupper($prof->getNom());
+                    return $prof->getDisplayedName();
                 }
             ])
             ->add('submit', SubmitType::class, [

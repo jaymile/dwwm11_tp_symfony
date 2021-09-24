@@ -41,7 +41,7 @@ class NoteType extends AbstractType {
                 'class' => Eleve::class,
                 'choice_label' => function (Eleve $eleve) {
                     // On peut passer une fonction pour savoir quoi afficher pour chaque élève
-                    return $eleve->getPrenom() . ' ' . strtoupper($eleve->getNom());
+                    return $eleve->getDisplayedName();
                 }
             ])
             ->add('submit', SubmitType::class, [
